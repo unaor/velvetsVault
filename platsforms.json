@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Fire Kirin",
+        "playerUrl": "http://start.firekirin.xyz:8580/index.html",
+        "agentUrl": "https://firekirin.xyz:8888/Store.aspx",
+        "logo": "fireKirin.jpg"
+    },
+    {
+        "name": "Game Room",
+        "playerUrl": "https://www.gameroom777.com/m",
+        "agentUrl": "https://agentserver1.gameroom777.com/admin/login",
+        "logo": "gameRoom.jpg"
+    },
+    {
+        "name": "Juwa",
+        "playerUrl": "https://dl.juwa777.com/",
+        "agentUrl": "https://ht.juwa777.com/HomeDetail",
+        "logo": "juwa.jpg"
+    },
+    {
+        "name": "Orion Stars",
+        "playerUrl": "https://start.orionstars.vip:8888/index.html",
+        "agentUrl": "https://orionstars.vip:8781/Store.aspx",
+        "logo": "orionStars.png"
+    },
+    {
+        "name": "Panda Master",
+        "playerUrl": "https://pandamaster.vip:8888/index.html",
+        "agentUrl": "https://pandamaster.vip/Store.aspx",
+        "logo": "pandaMaster.jpg"
+    },
+    {
+        "name": "Milky Way",
+        "playerUrl": "https://milkywayapp.xyz/",
+        "agentUrl": "https://milkywayapp.xyz:8781/Store.aspx",
+        "logo": "milkyWay.jpg"
+    }
+]
