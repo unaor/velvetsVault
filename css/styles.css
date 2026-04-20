@@ -14,6 +14,8 @@
   --platform-card-radius: 26px;
   --platform-btn-radius: 14px;
   --shadow-gold: 0 0 40px rgba(232, 197, 71, 0.08);
+  --telegram-blue: #229ed9;
+  --telegram-blue-deep: #1d8bc0;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
 }
@@ -199,7 +201,7 @@ body.is-loading {
   color: var(--gold-dim);
 }
 
-/* Gallery — single column on phones; wider shell + multi-column grid on large screens */
+/* Gallery — two columns on smaller viewports; three columns from 1100px */
 .gallery {
   padding: 0 1.25rem 3rem;
   max-width: 720px;
@@ -238,14 +240,8 @@ body.is-loading {
 .platform-grid {
   display: grid;
   gap: 1.25rem;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 700px) {
-  .platform-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
+  /* Two columns on phones; three from 1100px up */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 @media (min-width: 1100px) {
@@ -339,9 +335,10 @@ body.is-loading {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  min-height: 4.25rem;
-  padding: 0.55rem 0.35rem;
+  gap: 0;
+  min-height: 2.85rem;
+  min-width: 0;
+  padding: 0.45rem 0.35rem;
   border-radius: var(--platform-btn-radius);
   border: 1px solid transparent;
   font-family: var(--font-sans);
@@ -365,10 +362,6 @@ body.is-loading {
   display: block;
 }
 
-.platform-card__btn-label {
-  line-height: 1;
-}
-
 .platform-card__btn--secondary {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(255, 255, 255, 0.1);
@@ -383,15 +376,15 @@ body.is-loading {
 }
 
 .platform-card__btn--primary {
-  background: linear-gradient(180deg, #f0d54a 0%, #e8c547 45%, #d4b038 100%);
-  border-color: rgba(255, 255, 255, 0.22);
-  color: #141204;
-  box-shadow: 0 4px 14px rgba(232, 197, 71, 0.25);
+  background: linear-gradient(180deg, var(--telegram-blue) 0%, var(--telegram-blue-deep) 100%);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(34, 158, 217, 0.35);
 }
 
 .platform-card__btn--primary:hover,
 .platform-card__btn--primary:focus-visible {
-  filter: brightness(1.06);
+  filter: brightness(1.08);
   outline: none;
 }
 
@@ -426,21 +419,19 @@ body.is-loading {
   }
 
   .platform-card__actions {
-    padding: 0 0.85rem 0.85rem;
-    gap: 0.4rem;
+    padding: 0 0.75rem 0.75rem;
+    gap: 0.35rem;
   }
 
   .platform-card__btn {
-    min-height: 3.35rem;
-    padding: 0.4rem 0.25rem;
-    gap: 0.25rem;
-    font-size: 0.58rem;
-    border-radius: 12px;
+    min-height: 2.45rem;
+    padding: 0.3rem 0.2rem;
+    border-radius: 11px;
   }
 
   .platform-card__btn-icon {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 }
 

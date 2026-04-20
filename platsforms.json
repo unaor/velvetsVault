@@ -1,38 +1,320 @@
 [
     {
-        "name": "Fire Kirin",
+        "name": "BIG WINNER",
+        "playerUrl": "http://bigwplay.com",
+        "agentUrl": "http://dl.bigwplay.com",
+        "logo": "bigwplay.png"
+    },
+    {
+        "name": "VEGAS 7",
+        "playerUrl": "https://www.Vegas7games.pro",
+        "agentUrl": "https://Www.Cashier.vegas7games.pro",
+        "logo": "vegas-7.png"
+    },
+    {
+        "name": "PANDA MASTER",
+        "playerUrl": "https://pandamaster.vip:8888/index.html",
+        "agentUrl": "https://pandamaster.vip",
+        "logo": "panda-master.jpg"
+    },
+    {
+        "name": "LUCKY PARADISE",
+        "playerUrl": "https://www.luckyparadise777.com",
+        "agentUrl": "https://agent.luckyparadise777.com",
+        "logo": "lucky-paradise.jpg"
+    },
+    {
+        "name": "WINNER CLUB",
+        "playerUrl": "https://www.winnersclub777.com",
+        "agentUrl": "http://agent.winnersclub777.com:8003",
+        "logo": "winners-club.jpg"
+    },
+    {
+        "name": "MARS FORTUNE",
+        "playerUrl": "https://pl.marsfortune777.com/",
+        "agentUrl": "https://agent.marsfortunepay.com/auth/login",
+        "logo": "mars-fortune.png"
+    },
+    {
+        "name": "JUWA 2",
+        "playerUrl": "https://m.juwa2.com",
+        "agentUrl": "https://agent.juwa2.com",
+        "logo": "juwa-2.png"
+    },
+    {
+        "name": "FIRE KIRIN",
         "playerUrl": "http://start.firekirin.xyz:8580/index.html",
-        "agentUrl": "https://firekirin.xyz:8888/Store.aspx",
-        "logo": "fireKirin.jpg"
+        "agentUrl": "https://firekirin.xyz:8888/default.aspx",
+        "logo": "fire-kirin.jpg"
     },
     {
-        "name": "Game Room",
-        "playerUrl": "https://www.gameroom777.com/m",
-        "agentUrl": "https://agentserver1.gameroom777.com/admin/login",
-        "logo": "gameRoom.jpg"
-    },
-    {
-        "name": "Juwa",
+        "name": "JUWA",
         "playerUrl": "https://dl.juwa777.com/",
-        "agentUrl": "https://ht.juwa777.com/HomeDetail",
+        "agentUrl": "https://ht.juwa777.com/login",
         "logo": "juwa.jpg"
     },
     {
-        "name": "Orion Stars",
-        "playerUrl": "https://start.orionstars.vip:8888/index.html",
-        "agentUrl": "https://orionstars.vip:8781/Store.aspx",
-        "logo": "orionStars.png"
+        "name": "GAME VAULT",
+        "playerUrl": "http://download.gamevault999.com -  https://download.gamevault999.com/",
+        "agentUrl": "http://agent.gamevault999.com",
+        "logo": "game-vault.jpg"
     },
     {
-        "name": "Panda Master",
-        "playerUrl": "https://pandamaster.vip:8888/index.html",
-        "agentUrl": "https://pandamaster.vip/Store.aspx",
-        "logo": "pandaMaster.jpg"
+        "name": "VEGAS LUCK",
+        "playerUrl": "https://start.vegasluck777.com",
+        "agentUrl": "https://www.vegasluck777.com",
+        "logo": "vegas-luck.jpg"
     },
     {
-        "name": "Milky Way",
-        "playerUrl": "https://milkywayapp.xyz/",
-        "agentUrl": "https://milkywayapp.xyz:8781/Store.aspx",
-        "logo": "milkyWay.jpg"
+        "name": "ASTRO7",
+        "playerUrl": "https://start.astro7.win",
+        "agentUrl": "https://admin.astro7.win",
+        "logo": "astro-7.png"
+    },
+    {
+        "name": "ULTRA PANDA",
+        "playerUrl": "https://www.ultrapanda.club",
+        "agentUrl": "https://ht.ultrapanda.club",
+        "logo": "ultra-panda.jpg"
+    },
+    {
+        "name": "PLAY NET",
+        "playerUrl": "https://www.playnet.fun/index.php?width=0",
+        "agentUrl": "https://admin.playnet.fun/",
+        "logo": "play-net.png"
+    },
+    {
+        "name": "ADM BET",
+        "playerUrl": "https://admbet.com",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "adm-bet.png"
+    },
+    {
+        "name": "DOWNTOWN VEGAS",
+        "playerUrl": "https://downtown-vegas.net",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "downtown-vegas.png"
+    },
+    {
+        "name": "GO TO SPIN",
+        "playerUrl": "https://gotospin.net",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "go-to-spin.png"
+    },
+    {
+        "name": "LUCKY DRAGON",
+        "playerUrl": "https://lucky-dragon.net",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "lucky-dragon.png"
+    },
+    {
+        "name": "GRAND ROYAL",
+        "playerUrl": "https://royalvlt.com",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "grand-royal.png"
+    },
+    {
+        "name": "PLAY WIN PLAY",
+        "playerUrl": "https://playwplay.com",
+        "agentUrl": "https://ag.playwplay.com",
+        "logo": "play-win-play.png"
+    },
+    {
+        "name": "MR ALL IN ONE",
+        "playerUrl": "http://www.mrallinone777.com",
+        "agentUrl": "https://agentserver.mrallinone777.com",
+        "logo": "mr-all-in-one.jpg"
+    },
+    {
+        "name": "LUCKY STARS",
+        "playerUrl": "https://www.luckystars.games",
+        "agentUrl": "https://agent.luckystars.games",
+        "logo": "lucky-stars.jpg"
+    },
+    {
+        "name": "ULTRA POWER",
+        "playerUrl": "https://ultrapower.app/m/#/home",
+        "agentUrl": "https://go.ultrapower.app/#/login",
+        "logo": ""
+    },
+    {
+        "name": "LUCKY FISH",
+        "playerUrl": "https://luckyfish.pro",
+        "agentUrl": "https://bo.luckyfish.pro",
+        "logo": "lucky-fish.png"
+    },
+    {
+        "name": "MEGA LINK",
+        "playerUrl": "https://Mega Link Download address(by Mobile Phone https://www.megalink.fun/download/index.html Mega Link Website playing address: https://www.megalink.fun",
+        "agentUrl": "https://backend.megalink.fun:8088/admin",
+        "logo": "mega-link.png"
+    },
+    {
+        "name": "MILKY WAY",
+        "playerUrl": "https://milkywayapp.xyz",
+        "agentUrl": "https://milkywayapp.xyz:8781/",
+        "logo": "milky-way.jpg"
+    },
+    {
+        "name": "JACK WIN2",
+        "playerUrl": "https://Player link 1 : https://game.jack2.win                      Player link 2 : https://j2w-www.jack2.win",
+        "agentUrl": "https://j2w-adminen.jack2.win",
+        "logo": "jack-win2.png"
+    },
+    {
+        "name": "CASH MACHINE",
+        "playerUrl": "http://www.cashmachine777.com",
+        "agentUrl": "http://agentserver.cashmachine777.com:8003/",
+        "logo": "cash-machine.jpg"
+    },
+    {
+        "name": "BLUE DRAGON 777",
+        "playerUrl": "https://app.bluedragon777.com",
+        "agentUrl": "https://agent.bluedragon777.com",
+        "logo": "blue-dragon.jpg"
+    },
+    {
+        "name": "FIRE MASTER",
+        "playerUrl": "https://firemaster.vip:8888/",
+        "agentUrl": "https://firemaster.vip/default.aspx",
+        "logo": "fire-master.png"
+    },
+    {
+        "name": "ORION STAR",
+        "playerUrl": "http://start.orionstars.vip:8580/index.html http://web.orionstars.org/play/orionstars_pc/",
+        "agentUrl": "https://orionstars.vip:8781/default.aspx",
+        "logo": "orion-star.png"
+    },
+    {
+        "name": "RIVER",
+        "playerUrl": "https://Bet777.eu",
+        "agentUrl": "https://river-pay.com/office/login",
+        "logo": "river-sweeps.jpg"
+    },
+    {
+        "name": "RIVER MONSTER",
+        "playerUrl": "https://rm777.net",
+        "agentUrl": "https://rm-pay.com:8888/",
+        "logo": "river-monster.jpg"
+    },
+    {
+        "name": "KING OF POP",
+        "playerUrl": "http://www.slots88888.com/m",
+        "agentUrl": "https://as.slots88888.com",
+        "logo": "king-of-pop.jpg"
+    },
+    {
+        "name": "WIN STAR",
+        "playerUrl": "http://www.winstar99999.com/",
+        "agentUrl": "http://agent.winstar99999.com:8003",
+        "logo": "win-star.jpg"
+    },
+    {
+        "name": "NOBLE777",
+        "playerUrl": "https://www.noble777.com",
+        "agentUrl": "https://server.noble777.com",
+        "logo": "noble-777.jpg"
+    },
+    {
+        "name": "MAFIA",
+        "playerUrl": "http://www.mafia77777.com",
+        "agentUrl": "http://dl.mafia77777.com",
+        "logo": "mafia.jpg"
+    },
+    {
+        "name": "GAPI",
+        "playerUrl": "https://grandx.org",
+        "agentUrl": "https://grbo.gapi.lol",
+        "logo": ""
+    },
+    {
+        "name": "VEGAS VIP",
+        "playerUrl": "https://Vegas-vip.org",
+        "agentUrl": "https://vegas-vip.org/backend",
+        "logo": "vegas-vip.png"
+    },
+    {
+        "name": "EGAME",
+        "playerUrl": "https://www.egame99.club/",
+        "agentUrl": "https://pko.egame99.club/#/index",
+        "logo": "egame.jpg"
+    },
+    {
+        "name": "YOLO",
+        "playerUrl": "https://yolo777.game",
+        "agentUrl": "https://agent.yolo777.game",
+        "logo": "yolo.jpg"
+    },
+    {
+        "name": "VEGAS BLVD",
+        "playerUrl": "https://Vegas-Blvd.org",
+        "agentUrl": "https://Admin.Vegas-Blvd.net",
+        "logo": "vegas-blvd.png"
+    },
+    {
+        "name": "GAME TIME",
+        "playerUrl": "http://game-time.vip:8580/index.html",
+        "agentUrl": "https://game-time.vip:8888",
+        "logo": "game-time.png"
+    },
+    {
+        "name": "GAME ROOM",
+        "playerUrl": "https://www.gameroom777.com",
+        "agentUrl": "https://dl.gameroom777.com",
+        "logo": "game-room.jpg"
+    },
+    {
+        "name": "BIG WINNER PRO",
+        "playerUrl": "https://NO TIENE LINK DE JUGADOR",
+        "agentUrl": "Https://admin.bigwinner.pro",
+        "logo": ""
+    },
+    {
+        "name": "QUAKE",
+        "playerUrl": "https://www.quakegame.net",
+        "agentUrl": "https://www.quakegame.net/new_admin/",
+        "logo": "quake.jpg"
+    },
+    {
+        "name": "LAS VEGAS SWEEPS",
+        "playerUrl": "https://m.lasvegassweeps.com",
+        "agentUrl": "https://agent.lasvegassweeps.com",
+        "logo": "vegas-sweeps.jpg"
+    },
+    {
+        "name": "GOLDEN TREASURE",
+        "playerUrl": "https://www.goldentreasure.mobi/",
+        "agentUrl": "https://fus.goldentreasure.mobi/#/login",
+        "logo": "golden-treasure.jpg"
+    },
+    {
+        "name": "FUN ZONE",
+        "playerUrl": "https://Funzone777.com",
+        "agentUrl": "https://funzone-pay.com",
+        "logo": "fun-zone.png"
+    },
+    {
+        "name": "V BLINK",
+        "playerUrl": "https://www.vblink777.club",
+        "agentUrl": "https://gm.vblink777.club",
+        "logo": "vb-link.jpg"
+    },
+    {
+        "name": "ACEBOOK",
+        "playerUrl": "https://djwae.playacebook.mobi",
+        "agentUrl": "https://www.playacebook.mobi",
+        "logo": "ace-book.jpg"
+    },
+    {
+        "name": "VEGAS X",
+        "playerUrl": "https://Vegas-x.org",
+        "agentUrl": "https://Vegas-x.org/chat",
+        "logo": "vegasx.jpg"
+    },
+    {
+        "name": "GALAXY",
+        "playerUrl": "https://www.galaxyworld99.com/ https://galaxyworld99.com/",
+        "agentUrl": "https://agent.galaxyworld999.com/",
+        "logo": "galaxy-world.jpg"
     }
 ]

@@ -85,8 +85,8 @@
     '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M10.25 8.65L16.2 12l-5.95 3.35V8.65z"/></svg>';
   var ICON_HEADSET =
     '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0 1 18 0v6"/><path stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>';
-  var ICON_CART =
-    '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="21" r="1.25" fill="currentColor"/><circle cx="18" cy="21" r="1.25" fill="currentColor"/><path stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l1.2 9.6A2 2 0 0 0 8.2 16h8.6a2 2 0 0 0 1.97-1.64L21 7H7"/></svg>';
+  var ICON_TELEGRAM =
+    '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.417 15.181l-.818 4.426c.586 0 .843-.249 1.148-.547l2.763-2.677 5.731 4.207c1.048.549 1.791.261 2.074-.928l3.746-17.726c.334-1.558-.558-2.293-1.582-1.889L1.042 10.063c-1.501.597-1.478 1.453-.255 1.837l5.694 1.774L18.786 5.318c.608-.376 1.161-.169.705.207l-9.584 8.056z"/></svg>';
 
   function renderPlatforms(list) {
     if (!grid || !Array.isArray(list)) return;
@@ -99,17 +99,20 @@
       var media = document.createElement("div");
       media.className = "platform-card__media";
 
-      var img = document.createElement("img");
-      img.className = "platform-card__hero-img";
-      img.alt = "";
-      img.loading = "lazy";
-      img.src = logoPath(p.logo);
-      img.addEventListener("error", function onErr() {
-        img.removeEventListener("error", onErr);
-        img.replaceWith(heroFallback(p.name));
-      });
-
-      media.appendChild(img);
+      if (!p.logo) {
+        media.appendChild(heroFallback(p.name));
+      } else {
+        var img = document.createElement("img");
+        img.className = "platform-card__hero-img";
+        img.alt = "";
+        img.loading = "lazy";
+        img.src = logoPath(p.logo);
+        img.addEventListener("error", function onErr() {
+          img.removeEventListener("error", onErr);
+          img.replaceWith(heroFallback(p.name));
+        });
+        media.appendChild(img);
+      }
 
       var info = document.createElement("div");
       info.className = "platform-card__info";
@@ -128,19 +131,22 @@
       play.href = p.playerUrl;
       play.target = "_blank";
       play.rel = "noopener noreferrer";
-      play.innerHTML = ICON_PLAY + '<span class="platform-card__btn-label">Play</span>';
+      play.setAttribute("aria-label", "Play — opens in a new tab");
+      play.innerHTML = ICON_PLAY;
 
       var agent = document.createElement("a");
       agent.className = "platform-card__btn platform-card__btn--secondary";
       agent.href = p.agentUrl;
       agent.target = "_blank";
       agent.rel = "noopener noreferrer";
-      agent.innerHTML = ICON_HEADSET + '<span class="platform-card__btn-label">Agent</span>';
+      agent.setAttribute("aria-label", "Agent console — opens in a new tab");
+      agent.innerHTML = ICON_HEADSET;
 
       var buy = document.createElement("button");
       buy.type = "button";
       buy.className = "platform-card__btn platform-card__btn--primary";
-      buy.innerHTML = ICON_CART + '<span class="platform-card__btn-label">Buy</span>';
+      buy.setAttribute("aria-label", "Buy credits — request via Telegram");
+      buy.innerHTML = ICON_TELEGRAM;
       buy.addEventListener("click", function () {
         openBuyModal(p);
       });
