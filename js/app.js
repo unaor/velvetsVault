@@ -1,27 +1,6 @@
 (function () {
   "use strict";
 
-  /**
-   * Telegram destination for “Submit request”.
-   * Use your public @username only (no @), e.g. "velvet_sales".
-   * You can also paste "https://t.me/velvet_sales" — it will be normalized.
-   * The user must have Telegram installed (app or t.me in browser).
-   */
-  var TELEGRAM_USERNAME = "cafeine9";
-
-  function telegramUsernameFromConfig(raw) {
-    if (!raw || typeof raw !== "string") return "";
-    var s = raw.trim();
-    if (!s) return "";
-    if (/^https?:\/\//i.test(s)) {
-      try {
-        var path = new URL(s).pathname.replace(/^\//, "").split("/")[0];
-        if (path) s = path;
-      } catch (_) {}
-    }
-    return s.replace(/^@+/, "");
-  }
-
   var loadScreen = document.getElementById("load-screen");
   var splashVideo = document.getElementById("splash-video");
   var grid = document.getElementById("platform-grid");
@@ -29,12 +8,21 @@
   var modalPlatform = document.getElementById("buy-modal-platform");
   var buyForm = document.getElementById("buy-form");
   var creditAmount = document.getElementById("credit-amount");
-  var creditEmail = document.getElementById("credit-email");
-  var creditNote = document.getElementById("credit-note");
+  var headerCartButton = document.getElementById("header-cart");
+  var headerCartBadge = document.getElementById("header-cart-badge");
+  var headerCartEmpty = document.getElementById("header-cart-empty");
+  var cartModal = document.getElementById("cart-modal");
+  var cartLines = document.getElementById("cart-lines");
+  var cartContactForm = document.getElementById("cart-contact-form");
+  var cartMessage = document.getElementById("cart-message");
+  var floatingTelegram = document.getElementById("floating-telegram");
+  var floatingWhatsapp = document.getElementById("floating-whatsapp");
+  var CART_STORAGE_KEY = "velvet-vault-cart";
 
   var selectedPlatform = null;
   var minSplashMs = 3000;
   var splashStart = Date.now();
+  var cartBlinkTimer = null;
 
   function hideLoadScreen() {
     if (!loadScreen || loadScreen.classList.contains("is-done")) return;
@@ -86,7 +74,7 @@
   var ICON_HEADSET =
     '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" d="M3 18v-6a9 9 0 0 1 18 0v6"/><path stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>';
   var ICON_TELEGRAM =
-    '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M9.417 15.181l-.818 4.426c.586 0 .843-.249 1.148-.547l2.763-2.677 5.731 4.207c1.048.549 1.791.261 2.074-.928l3.746-17.726c.334-1.558-.558-2.293-1.582-1.889L1.042 10.063c-1.501.597-1.478 1.453-.255 1.837l5.694 1.774L18.786 5.318c.608-.376 1.161-.169.705.207l-9.584 8.056z"/></svg>';
+    '<svg class="platform-card__btn-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h2l1.2 8.2a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 2-1.6L20 8H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.3" cy="18.6" r="1.4" fill="currentColor"/><circle cx="16.7" cy="18.6" r="1.4" fill="currentColor"/></svg>';
 
   function renderPlatforms(list) {
     if (!grid || !Array.isArray(list)) return;
@@ -145,7 +133,7 @@
       var buy = document.createElement("button");
       buy.type = "button";
       buy.className = "platform-card__btn platform-card__btn--primary";
-      buy.setAttribute("aria-label", "Buy credits — request via Telegram");
+      buy.setAttribute("aria-label", "Add credits to cart");
       buy.innerHTML = ICON_TELEGRAM;
       buy.addEventListener("click", function () {
         openBuyModal(p);
@@ -178,8 +166,6 @@
       creditAmount.value = "";
       creditAmount.focus();
     }
-    if (creditEmail) creditEmail.value = "";
-    if (creditNote) creditNote.value = "";
     modal.hidden = false;
     document.body.style.overflow = "hidden";
   }
@@ -190,50 +176,173 @@
     selectedPlatform = null;
   }
 
+  function openCartModal() {
+    renderCartLines();
+    if (cartMessage) cartMessage.value = "";
+    cartModal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCartModal() {
+    cartModal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
   function wireModal() {
     modal.querySelectorAll("[data-close-modal]").forEach(function (el) {
       el.addEventListener("click", closeBuyModal);
     });
+    cartModal.querySelectorAll("[data-close-cart-modal]").forEach(function (el) {
+      el.addEventListener("click", closeCartModal);
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !modal.hidden) closeBuyModal();
+      if (e.key === "Escape" && !cartModal.hidden) closeCartModal();
     });
+  }
+
+  function wireFloatingBubbles() {
+    function noopBubbleClick(e) {
+      e.preventDefault();
+    }
+
+    if (floatingTelegram) {
+      floatingTelegram.addEventListener("click", noopBubbleClick);
+    }
+
+    if (floatingWhatsapp) {
+      floatingWhatsapp.addEventListener("click", noopBubbleClick);
+    }
+  }
+
+  function readCart() {
+    try {
+      var raw = window.localStorage.getItem(CART_STORAGE_KEY);
+      if (!raw) return [];
+      var parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function writeCart(items) {
+    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  }
+
+  function removeCartItemByIndex(index) {
+    var cart = readCart();
+    if (index < 0 || index >= cart.length) return;
+    cart.splice(index, 1);
+    writeCart(cart);
+  }
+
+  function updateCartButton() {
+    if (!headerCartButton || !headerCartBadge || !headerCartEmpty) return;
+    var count = readCart().length;
+    if (count > 0) {
+      headerCartBadge.textContent = String(count);
+      headerCartBadge.hidden = false;
+      headerCartEmpty.hidden = true;
+      headerCartButton.setAttribute("aria-label", "Shopping cart with " + count + " item" + (count > 1 ? "s" : ""));
+    } else {
+      headerCartBadge.hidden = true;
+      headerCartEmpty.hidden = false;
+      headerCartButton.setAttribute("aria-label", "Shopping cart is empty");
+    }
+  }
+
+  function signalCartAdded() {
+    if (!headerCartButton) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    headerCartButton.classList.remove("is-blink");
+    void headerCartButton.offsetWidth;
+    headerCartButton.classList.add("is-blink");
+    if (cartBlinkTimer) window.clearTimeout(cartBlinkTimer);
+    cartBlinkTimer = window.setTimeout(function () {
+      headerCartButton.classList.remove("is-blink");
+      cartBlinkTimer = null;
+    }, 1200);
+  }
+
+  function renderCartLines() {
+    if (!cartLines) return;
+    var cart = readCart();
+    cartLines.innerHTML = "";
+    cart.forEach(function (item, idx) {
+      var row = document.createElement("li");
+      row.className = "cart-lines__item";
+
+      var name = document.createElement("span");
+      name.className = "cart-lines__name";
+      name.textContent = item.platform || "Platform";
+
+      var meta = document.createElement("div");
+      meta.className = "cart-lines__meta";
+
+      var amount = document.createElement("strong");
+      amount.className = "cart-lines__amount";
+      amount.textContent = String(item.credits || 0);
+
+      var removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "cart-lines__remove";
+      removeBtn.setAttribute("aria-label", "Remove item from cart");
+      removeBtn.textContent = "×";
+      removeBtn.addEventListener("click", function () {
+        removeCartItemByIndex(idx);
+        renderCartLines();
+        updateCartButton();
+      });
+
+      meta.appendChild(amount);
+      meta.appendChild(removeBtn);
+      row.appendChild(name);
+      row.appendChild(meta);
+      cartLines.appendChild(row);
+    });
+  }
+
+  function wireCart() {
+    if (headerCartButton) {
+      headerCartButton.addEventListener("click", openCartModal);
+    }
+
+    if (cartContactForm) {
+      cartContactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        closeCartModal();
+      });
+    }
   }
 
   buyForm.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!selectedPlatform) return;
     var amount = creditAmount.value.trim();
-    var email = (creditEmail && creditEmail.value) ? creditEmail.value.trim() : "";
-    var note = (creditNote.value || "").trim();
-    var handle = telegramUsernameFromConfig(TELEGRAM_USERNAME);
-    if (!handle) {
-      window.alert(
-        "Telegram is not configured yet. Set TELEGRAM_USERNAME at the top of js/app.js to your @username (without @)."
-      );
+    if (!amount) {
+      creditAmount.focus();
       return;
     }
-    var message =
-      "You have a message from Velvets Vault\n\n" +
-      email +
-      " is interested in buying " +
-      amount +
-      " for platform " +
-      selectedPlatform.name +
-      (note ? "\n\n" + note : "");
-    var url = "https://t.me/" + encodeURIComponent(handle) + "?text=" + encodeURIComponent(message);
-    /* Do not use window.open(..., "noopener") — it often returns null, which made the old code fall back to location.href and hijack this tab. */
-    var a = document.createElement("a");
-    a.href = url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+
+    var cart = readCart();
+    cart.push({
+      platform: selectedPlatform.name,
+      credits: Number(amount),
+      addedAt: new Date().toISOString()
+    });
+    writeCart(cart);
+    updateCartButton();
+
     closeBuyModal();
+    signalCartAdded();
   });
 
   initSplash();
   wireModal();
+  wireFloatingBubbles();
+  wireCart();
+  updateCartButton();
 
   fetch("platsforms.json")
     .then(function (r) {
